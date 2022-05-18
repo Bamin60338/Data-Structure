@@ -1,0 +1,89 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct Node
+{
+    int data;
+    struct Node *next;
+};
+void linkedlisttravesal(struct Node *a)
+{
+    while(a!=NULL)
+    {
+        printf("Element %d \n",a->data);
+        a=a->next;
+    }
+}
+struct Node *insertionfirst(struct Node *first,int data)
+{
+    struct Node *p=(struct Node*)malloc(sizeof(struct Node));
+    p->data=data;
+    p->next=first;
+    return p;
+}
+struct Node *insertionbet(struct Node*first,int data,int index)
+{
+    struct Node *p=(struct Node*)malloc(sizeof(struct Node));
+    struct Node *is=first;
+    int i=0;
+    while(i!=index-1)
+    {
+        is=is->next;
+        i++;
+    }
+    p->data=data;
+    p->next=is->next;
+    is->next=p;
+    return first;
+}
+struct Node *insertionend(struct Node *first,int data)
+{
+    struct Node *p=(struct Node*)malloc(sizeof(struct Node));
+    struct Node *is=first;
+    while(is->next!=NULL)
+    {
+        is=is->next;
+    }
+    p->data=data;
+    is->next=p;
+    p->next=NULL;
+    return first;
+}
+struct Node *insertiongiven(struct Node *first,struct Node *prev,int data)
+{
+    struct Node *p=(struct Node*)malloc(sizeof(struct Node));
+    p->data=data;
+    p->next=prev->next;
+    prev->next=p;
+    return first;
+}
+int main()
+{
+    struct Node *first;
+    struct Node *second;
+    struct Node *third;
+    struct Node *fourth;
+    struct Node *fifth;
+    first=(struct Node*)malloc(sizeof(struct Node));
+    second=(struct Node*)malloc(sizeof(struct Node));
+    third=(struct Node*)malloc(sizeof(struct Node));
+    fourth=(struct Node*)malloc(sizeof(struct Node));
+    fifth=(struct Node*)malloc(sizeof(struct Node));
+    first->data=3;
+    first->next=second;
+    second->data=5;
+    second->next=third;
+    third->data=7;
+    third->next=fourth;
+    fourth->data=9;
+    fourth->next=fifth;
+    fifth->data=11;
+    fifth->next=NULL;
+    linkedlisttravesal(first);
+    printf("\n");
+    //first= insertionfirst(first, 56);
+    //first=insertionbet(first,55,1);
+    //first=insertionend(first,13);
+    first=insertiongiven(first,third,8);
+    linkedlisttravesal(first);
+    return 0;
+}

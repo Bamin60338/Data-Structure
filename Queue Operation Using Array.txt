@@ -1,0 +1,72 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct queue
+{
+    int size;
+    int f;
+    int r;
+    int *arr;
+};
+int isempty(struct queue *a)
+{
+    if(a->f==a->r)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int isfull(struct queue *a)
+{
+    if(a->r==a->size-1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int queuetop(struct queue *a)
+{
+    return a->arr[a->f];   
+}
+int queuebottom(struct queue *a)
+{
+    return a->arr[a->r];
+}
+void enqueue(struct queue *a,int value)
+{
+    if(isfull(a))
+    {
+        printf("Queue is full\n");
+    }
+    a->r++;
+    a->arr[a->r]=value;
+}
+int dequeue(struct queue *a)
+{
+    if(isempty(a))
+    {
+        printf("Queue is empty\n");
+    }
+    a->f++;
+    int x=a->arr[a->f];
+    return x;
+}
+int main()
+{
+    struct queue *a=(struct queue*)malloc(sizeof(struct queue));
+    a->size=5;
+    a->f=a->r=-1;
+    a->arr=(int*)malloc(a->size*sizeof(int));
+    enqueue(a, 12);
+    enqueue(a, 15);
+    enqueue(a, 1);
+    printf("Dequeuing element %d\n", dequeue(a));
+    printf("Dequeuing element %d\n", dequeue(a));
+    printf("Dequeuing element %d\n", dequeue(a));
+    return 0;
+}

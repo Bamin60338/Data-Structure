@@ -1,0 +1,73 @@
+//Using Iterative
+#include <stdio.h>
+int binarysearch(int arr[],int size,int x,int h,int l)
+{
+    int mid;
+    while(l<=h)
+    {
+    mid = (l + h)/2;
+    if(arr[mid] == x)
+    {
+        return mid;
+    }
+        
+    if(arr[mid]<x)
+    {
+        l= mid+1;
+    }
+    else
+    {
+            h= mid -1;
+    }
+    } 
+    return -1;
+}
+int main()
+{
+    int arr[] = {3,8,13,48,69,85,134,170,322};
+    int size = sizeof(arr)/sizeof(int);
+    int element=-2;
+    int l= 0;
+    int h= size-1;
+    int index=binarysearch(arr,size,element,h,l);
+    if(index==-100)
+    printf("Element not found");
+    else
+    printf("The element %d was found at %d index",element,index);
+    return 0;
+}
+
+//Using Recursion
+#include <stdio.h>
+int binarysearch(int *a,int size,int element,int l,int u)
+{
+    int mid;
+    while(l<=u)
+    {
+        mid=(l+u)/2;
+        if(a[mid]==element)
+        {
+            return mid;
+        }
+        if(a[mid]<element)
+        {
+            return binarysearch(a,size,element,mid+1,u);    
+        }
+        else
+        {
+            return binarysearch(a,size,element,l,mid-1);
+        }
+    }
+    return -1;
+}
+int main()
+{
+    int arr[] = {2,4,5,6,8,9,12,38};
+    int size = sizeof(arr)/sizeof(int);
+    int element=38;
+    int l=0;
+    int u=size-1;
+    int s=binarysearch(arr,size,element,l,u);
+    printf("%d",s);
+    return 0;
+}

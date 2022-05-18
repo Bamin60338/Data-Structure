@@ -1,0 +1,117 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct stack
+{
+    int size;
+    int top;
+    int *arr;
+};
+int isfull(struct stack *a)
+{
+    if(a->top==a->size-1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int isempty(struct stack *a)
+{
+    if(a->top==-1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+void push(struct stack *as,int value)
+{
+    if(isfull(as))
+    {
+        printf("stack overflow \n");
+    }
+    else
+    {
+    as->top++;
+    as->arr[as->top]=value;
+    }
+}
+int pop(struct stack *as)
+{
+    if(isempty(as))
+    {
+        printf("stack underflow\n");
+        return -1;
+    }
+    else
+    {
+    int value;
+    value=as->arr[as->top];
+    as->top--;
+    return value;
+    }
+}
+int peek(struct stack *p,int i)
+{
+    int ind=p->top-i+1;
+    if(ind<0)
+    {
+        printf("Not valid  postion \n");
+        return -1;
+    }
+    else
+    {
+        return p->arr[ind];
+    }
+}
+int stackTop(struct stack* sp)
+{
+    return sp->arr[sp->top];
+}
+int stackBottom(struct stack* sp)
+{
+    return sp->arr[0];
+}
+int main()
+{
+    struct stack *s;
+    s=(struct stack*)malloc(sizeof(struct stack));
+    s->size=10;
+    s->top=-1;
+    s->arr=(int*)malloc(s->size*sizeof(int));
+    printf("%d\n",isempty(s));
+    printf("%d\n",isfull(s));
+    push(s,2);
+    push(s,3);
+    push(s,4);
+    push(s,5);
+    push(s,6);
+    push(s,7);
+    push(s,8);
+    push(s,9);
+    push(s,10);
+    push(s,11);
+    push(s,12);
+    for(int i=1;i<=s->top+1;i++)
+    {
+        printf("the value of stack in position %d is %d \n",i,peek(s,i));
+    }
+    printf("%d\n",isempty(s));
+    printf("%d\n",isfull(s));
+    printf("%d\n",pop(s));
+    printf("%d\n",pop(s));
+    printf("%d\n",pop(s));
+    printf("%d\n",pop(s));
+    printf("%d\n",pop(s));
+    printf("%d\n",pop(s));
+    printf("%d\n",pop(s));
+    printf("%d\n",pop(s));
+    printf("%d\n",pop(s));
+    printf("%d\n",pop(s));
+    pop(s);
+    return 0;
+}
